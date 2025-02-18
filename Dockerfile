@@ -3,17 +3,12 @@ FROM node:20.18-slim
 
 LABEL authors="mahery"
 
-# CREATE DIRECTORY INSIDE THE DOCKER IMAGE
-RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
+WORKDIR /app
 
-COPY package*.json ./
-
-USER node
+COPY package*.json /app
 
 RUN npm install
 
-COPY --chown=node:node . .
-
-EXPOSE 5000
+COPY . /app
 
 CMD ["npm", "start"]

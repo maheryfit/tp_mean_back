@@ -6,14 +6,11 @@ services: # services which our app going to use. (list of containers we want to 
       - "27017:27017"
     volumes:
       - mongo_db:/data/db
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=mongomhr2003
     networks: # adding network
       - mern-app
 
-  api-server:
-    image: api-server
+  app-server:
+    image: app-server
     ports:
       - "5000:5000"
     depends_on:
