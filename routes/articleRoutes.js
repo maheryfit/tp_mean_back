@@ -23,6 +23,16 @@ router.get('/', async (req, res) => {
      }
 });
 
+// Lire une article
+router.get('/:id', async (req, res) => {
+     try {
+         const articles = await Article.findById(req.params.id);
+         res.json(articles);
+     } catch (error) {
+         res.status(500).json({ message: error.message });
+     }
+});
+
 // Mettre à jour un article
 router.put('/:id', async (req, res) => {
      try {
