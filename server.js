@@ -6,7 +6,7 @@ require('dotenv').config();
 const app = express();
 
 const PORT = process.env.PORT || 5000;
-
+const VERSION = process.env.VERSION || 'v1'
 
 // Middleware
 app.use(cors());
@@ -20,5 +20,7 @@ mongoose.connect(process.env.MONGO_URI, {
     .catch(err => console.log(err));
 
 // Routes
-app.use('/articles', require('./routes/articleRoutes'));
+app.use('/api/'+VERSION+'/articles', require('./routes/articleRoutes'))
+    .use('/api/'+VERSION+'/users', require('./routes/userRoutes'));
+
 app.listen(PORT, () => console.log(`Serveur démarré sur le port ${PORT}`));
